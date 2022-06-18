@@ -31,4 +31,4 @@ def create_folder(path="."):
     for f in folders:
         if f == "downloads":
             return
-    os.mkdir("../downloads")
+    os.mkdir("./downloads")

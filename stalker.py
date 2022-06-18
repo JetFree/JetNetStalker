@@ -8,7 +8,7 @@ from scripts.menu import *
 from scripts.os_utils import open_downloads_resources, get_dir_size
 
 
-def run_pool():
+def run_pool(threads, condition, link_counter, event, url):
     try:
         pool = multiprocessing.Pool(threads)
         iter_list = generate()
@@ -33,7 +33,7 @@ def print_statistics(start, links):
     print(Fore.MAGENTA + f"Folder size: {int(get_dir_size())}kb")
 
 
-if __name__ == '__main__':
+def main():
     os_utils.create_folder()
     os_utils.clean_folder()
     method_dict = {"time": select_time, "links": select_links,
@@ -49,6 +49,10 @@ if __name__ == '__main__':
     event = manager.Event()
     link_counter = manager.Value("i", 0)
     start_time = datetime.now()
-    run_pool()
+    run_pool(threads, condition,link_counter, event, url)
     print_statistics(start_time, link_counter.value)
     open_downloads_resources()
+
+
+if __name__ == '__main__':
+    main()
