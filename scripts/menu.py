@@ -1,7 +1,7 @@
 import sys
 from datetime import datetime, timedelta
 from colorama import Fore
-from requests_controller import is_host_available
+from scripts.requests_controller import is_host_available
 
 
 def print_start_welcome():

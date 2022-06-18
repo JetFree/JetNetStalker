@@ -1,4 +1,4 @@
-from os_utils import get_dir_size
+from scripts.os_utils import get_dir_size
 from bs4 import BeautifulSoup
 from colorama import Fore
 import requests

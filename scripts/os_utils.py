@@ -21,3 +21,11 @@ def clean_folder(path='./downloads'):
     folder_items = os.listdir(path)
     for item in folder_items:
         os.remove(os.path.join(path, item))
+
+
+def create_folder(path="."):
+    folders = [f.name for f in os.scandir(path) if f.is_dir()]
+    for f in folders:
+        if f == "downloads":
+            return
+    os.mkdir("../downloads")

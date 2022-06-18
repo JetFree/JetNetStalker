@@ -1,19 +1,19 @@
 import multiprocessing
 from functools import partial
-import linkbruteforcer
-import os_utils
-import requests_controller
-from custom_iterator import MyIterator
-from menu import *
-from os_utils import open_downloads_resources, get_dir_size
+from scripts.requests_controller import *
+from scripts.linkbruteforcer import generate
+from scripts import os_utils
+from scripts.custom_iterator import MyIterator
+from scripts.menu import *
+from scripts.os_utils import open_downloads_resources, get_dir_size
 
 
 def run_pool():
     try:
         pool = multiprocessing.Pool(threads)
-        iter_list = linkbruteforcer.generate()
+        iter_list = generate()
         for perm_iter in iter_list:
-            list(pool.imap(partial(requests_controller.check_url, condition, link_counter, event, url),
+            list(pool.imap(partial(check_url, condition, link_counter, event, url),
                            MyIterator(perm_iter, event)))
     except KeyboardInterrupt:
         print("Program was stopped by user.")
@@ -33,6 +33,7 @@ def print_statistics(start, links):
 
 
 if __name__ == '__main__':
+    os_utils.create_folder()
     os_utils.clean_folder()
     method_dict = {"time": select_time, "links": select_links, "size": select_size}
     print_start_welcome()
