@@ -48,7 +48,8 @@ def parse_url(html_page):
     soup = BeautifulSoup(html_page, "html.parser")
     if elem := soup.find("meta", attrs={"property": "og:video:secure_url"}):
         return elem["content"]
-    elif result := re.search("content=\"(https:\/\/i\.imgur\.com\/[a-zA-z0-9]{4,8}\.[a-zA-Z0-9]{3,6})", html_page):
+    elif result := re.search("content=\"(https:\/\/i\.imgur\.com\/[a-zA-z0-9]"
+                             "{4,8}\.[a-zA-Z0-9]{3,6})", html_page):
         return result.group(1)
     else:
         print("Can't find what to download on the page")

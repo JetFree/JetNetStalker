@@ -13,8 +13,8 @@ def run_pool():
         pool = multiprocessing.Pool(threads)
         iter_list = generate()
         for perm_iter in iter_list:
-            list(pool.imap(partial(check_url, condition, link_counter, event, url),
-                           MyIterator(perm_iter, event)))
+            list(pool.imap(partial(check_url, condition, link_counter, event,
+                                   url), MyIterator(perm_iter, event)))
     except KeyboardInterrupt:
         print("Program was stopped by user.")
         sys.exit(0)
@@ -27,7 +27,8 @@ def print_statistics(start, links):
     time_delta = datetime.now() - start
     hours, remainder = divmod(time_delta.seconds, 3600)
     minutes, seconds = divmod(remainder, 60)
-    print(Fore.MAGENTA + f"Ready for: {hours:> 3d} hours {minutes} minutes {seconds} seconds")
+    print(Fore.MAGENTA + f"Ready for: {hours:> 3d} hours {minutes} minutes"
+                         f" {seconds} seconds")
     print(Fore.MAGENTA + f"Found links: {links}")
     print(Fore.MAGENTA + f"Folder size: {int(get_dir_size())}kb")
 
@@ -35,7 +36,8 @@ def print_statistics(start, links):
 if __name__ == '__main__':
     os_utils.create_folder()
     os_utils.clean_folder()
-    method_dict = {"time": select_time, "links": select_links, "size": select_size}
+    method_dict = {"time": select_time, "links": select_links,
+                   "size": select_size}
     print_start_welcome()
     url = select_target()
     threads = select_threads()

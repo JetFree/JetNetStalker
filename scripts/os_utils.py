@@ -2,8 +2,11 @@ import os
 
 
 def open_downloads_resources():
-    if os.system("exo-open --working-directory ./downloads --launch FileManager") != 0:
-        print("Failed to open downloads folder. Verify that you use Kali linux distributive for running this program")
+    command = "exo-open --working-directory ./downloads --launch FileManager"
+    if os.system(command) != 0:
+        print("Failed to open downloads folder."
+              " Verify that you use Kali linux distributive for running"
+              " this program")
 
 
 def get_dir_size(path='./downloads'):
